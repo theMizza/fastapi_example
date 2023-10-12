@@ -44,4 +44,8 @@ async def add_questions(data: schemas.RequestDataSchema = None, database: Sessio
 
 @router.get('/')
 async def get_question(question_id: int = None, database: Session = Depends(get_db)):
-    return db_services.get_question(question_id, database)
+    data = db_services.get_question(question_id, database)
+    if data:
+        return data
+    else:
+        return {}
